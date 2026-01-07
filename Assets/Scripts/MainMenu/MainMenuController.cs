@@ -1,4 +1,6 @@
 using TMPro;
+using Tools.B2B.PlayerRegistration.Models;
+using Tools.B2B.PlayerRegistration.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -26,12 +28,14 @@ namespace MainMenu
         private const string ErrorMessageFillFields = "Por favor, preencha todos os campos.";
         private const string ErrorMessageInvalidEmail = "Por favor, insira um email válido com @.";
         private const string ErrorMessageInvalidPhone = "O telefone deve conter apenas números.";
+        private IPlayerRegistrationService _playerRegistrationService;
 
         private GoogleSheetsService _googleSheetsService;
 
         private void Start()
         {
             SetupGoogleSheetsService();
+            SetupPlayerRegistrationService();
             SetupInputFields();
             SetupKeyboardAvoidance();
         
@@ -53,6 +57,11 @@ namespace MainMenu
                 _googleSheetsService = serviceObj.AddComponent<GoogleSheetsService>();
                 DontDestroyOnLoad(serviceObj);
             }
+        }
+
+        private void SetupPlayerRegistrationService()
+        {
+            _playerRegistrationService = new PlayerRegistrationService();
         }
 
         private void SetupInputFields()
@@ -84,60 +93,28 @@ namespace MainMenu
             }
         }
 
-        private void OnStartButtonClicked()
+        private async void OnStartButtonClicked()
         {
             var playerName = nameInputField.text;
             var playerEmail = emailInputField.text;
             var playerCellphone = cellphoneInputField.text;
 
-            string validationError = ValidateInputs(playerName, playerEmail, playerCellphone);
-        
-            if (string.IsNullOrEmpty(validationError))
+            var result = await _playerRegistrationService.RegisterPlayerAsync(
+                playerName, 
+                playerEmail,
+                playerCellphone,
+                consent: true);
+
+            if (result.Success)
             {
                 HideErrorMessage();
-                SavePlayerData(playerName, playerEmail, playerCellphone);
+                SavePlayerData(result.PlayerData);
                 LoadGameplayScene();
             }
             else
             {
-                ShowErrorMessage(validationError);
+                ShowErrorMessage(result.ErrorMessage);
             }
-        }
-
-        private string ValidateInputs(string name, string email, string cellphone)
-        {
-            if (string.IsNullOrWhiteSpace(name) || 
-                string.IsNullOrWhiteSpace(email) || 
-                string.IsNullOrWhiteSpace(cellphone))
-            {
-                return ErrorMessageFillFields;
-            }
-
-            if (!email.Contains("@"))
-            {
-                return ErrorMessageInvalidEmail;
-            }
-
-            if (!IsNumeric(cellphone))
-            {
-                return ErrorMessageInvalidPhone;
-            }
-
-            return null;
-        }
-
-        private bool IsNumeric(string text)
-        {
-            if (string.IsNullOrEmpty(text))
-                return false;
-
-            foreach (char c in text)
-            {
-                if (!char.IsDigit(c))
-                    return false;
-            }
-
-            return true;
         }
 
         private void ShowErrorMessage(string message)
@@ -156,11 +133,11 @@ namespace MainMenu
             
         }
 
-        private void SavePlayerData(string name, string email, string cellphone)
+        private void SavePlayerData(PlayerRegistrationData playerData)
         {
-            PlayerPrefs.SetString("PlayerName", name);
-            PlayerPrefs.SetString("PlayerEmail", email);
-            PlayerPrefs.SetString("PlayerCellphone", cellphone);
+            PlayerPrefs.SetString("PlayerName", playerData.Name);
+            PlayerPrefs.SetString("PlayerEmail", playerData.Email);
+            PlayerPrefs.SetString("PlayerCellphone", playerData.PhoneNumber);
             PlayerPrefs.Save();
         }
 

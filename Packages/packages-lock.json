@@ -8,6 +8,12 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       }
     },
+    "com.suricatusgames.tools.b2b-player-registration": {
+      "version": "file:C:/Users/User/Documents/GitHub/tools/tools/Tools.PlayerRegistration",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
     "com.unity.2d.animation": {
       "version": "13.0.2",
       "depth": 0,
