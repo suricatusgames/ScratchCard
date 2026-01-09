@@ -1,7 +1,9 @@
 using System;
+using Tools.SoundManager.Services;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Gameplay.ScratchCard
 {
@@ -23,6 +25,11 @@ namespace Gameplay.ScratchCard
         [SerializeField] private Color borderColor = Color.yellow;
         [SerializeField] private float borderWidth = 10f;
         
+        [Header("Audio")]
+        [SerializeField] private AudioClip scratchSound;
+
+        [Inject] private ISoundManager _soundManager;
+        
         private Texture2D _scratchTexture;
         private Color[] _pixels;
         private int _totalPixels;
@@ -40,7 +47,7 @@ namespace Gameplay.ScratchCard
         public bool IsScratched => _isScratched;
         public float ScratchPercentage => (float)_scratchedPixels / _totalPixels;
         
-        private void Awake()
+        private async void Awake()
         {
             if (activeBorder != null)
             {
@@ -117,6 +124,8 @@ namespace Gameplay.ScratchCard
                 return;
             
             RectTransformUtility.ScreenPointToLocalPointInRectangle(scratchLayer.rectTransform, screenPosition, null, out var localPoint);
+            
+            _soundManager.PlaySfx(scratchSound, 0.5f);
 
             var normalizedPoint = new Vector2(
                 (localPoint.x / scratchLayer.rectTransform.rect.width) + 0.5f,

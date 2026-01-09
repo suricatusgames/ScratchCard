@@ -1,10 +1,12 @@
 using TMPro;
 using Tools.B2B.PlayerRegistration.Models;
 using Tools.B2B.PlayerRegistration.Services;
+using Tools.SoundManager.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
+using Zenject;
 
 namespace MainMenu
 {
@@ -14,10 +16,18 @@ namespace MainMenu
         [SerializeField] private TMP_InputField nameInputField;
         [SerializeField] private TMP_InputField emailInputField;
         [SerializeField] private TMP_InputField cellphoneInputField;
+        
+        [Header("Sound Settings")]
+        [SerializeField] private AudioClip backgroundMusic;
+        [SerializeField] private AudioClip buttonClick;
 
         [Header("UI Elements")]
         [SerializeField] private Button startButton;
+        [SerializeField] private Button soundButton;
         [SerializeField] private TMP_Text errorMessageText;
+        [SerializeField] private Image soundButtonIcon;
+        [SerializeField] private Sprite soundOnSprite;
+        [SerializeField] private Sprite soundMutedSprite;
 
         [Header("Keyboard Avoidance")]
         [SerializeField] private KeyboardAvoidance keyboardAvoidance;
@@ -29,23 +39,33 @@ namespace MainMenu
         private const string ErrorMessageInvalidEmail = "Por favor, insira um email válido com @.";
         private const string ErrorMessageInvalidPhone = "O telefone deve conter apenas números.";
         private IPlayerRegistrationService _playerRegistrationService;
-
         private GoogleSheetsService _googleSheetsService;
+        
+        [Inject] private ISoundManager _soundManager;
 
-        private void Start()
+        private async void Start()
         {
             SetupGoogleSheetsService();
             SetupPlayerRegistrationService();
             SetupInputFields();
             SetupKeyboardAvoidance();
-        
+
+            await _soundManager.PlayMusic(backgroundMusic);
+
             if (startButton != null)
             {
                 startButton.onClick.AddListener(OnStartButtonClicked);
             }
+            
+            if (soundButton != null)
+            {
+                soundButton.onClick.AddListener(OnSoundButtonClicked);
+                UpdateSoundButtonVisual(_soundManager.IsMuted());
+            }
 
             HideErrorMessage();
         }
+
 
         private void SetupGoogleSheetsService()
         {
@@ -63,6 +83,26 @@ namespace MainMenu
         {
             _playerRegistrationService = new PlayerRegistrationService();
         }
+
+        public void OnSoundButtonClicked()
+        {
+            var currentMuteState = _soundManager.IsMuted();
+            var newMuteState = !currentMuteState;
+    
+            _soundManager.Mute(newMuteState);
+            _soundManager.SaveSettings();
+    
+            UpdateSoundButtonVisual(newMuteState);
+        }
+        
+        private void UpdateSoundButtonVisual(bool isMuted)
+        {
+            if (soundButtonIcon != null)
+            {
+                soundButtonIcon.sprite = isMuted ? soundMutedSprite : soundOnSprite;
+            }
+        }
+
 
         private void SetupInputFields()
         {
@@ -152,6 +192,12 @@ namespace MainMenu
             {
                 startButton.onClick.RemoveListener(OnStartButtonClicked);
             }
+            
+            if (soundButton != null)
+            {
+                soundButton.onClick.RemoveListener(OnSoundButtonClicked);
+            }
         }
+
     }
 }

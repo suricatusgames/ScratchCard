@@ -118,6 +118,7 @@
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne.json" />
+    <None Include="C:\Users\User\Documents\GitHub\tools\tools\Tools.SoundManager\package.json" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <Reference Include="UnityEngine">
@@ -522,17 +523,29 @@
     <Reference Include="UnityEditor.XRModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.3.2f1\Editor\Data\Managed\UnityEngine\UnityEditor.XRModule.dll</HintPath>
     </Reference>
+    <Reference Include="Zenject-usage">
+      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Assets\Plugins\Zenject\Source\Usage\Zenject-usage.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\PackageCache\com.unity.ext.nunit@d8c07649098d\net40\unity-custom\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Pdb">
+      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
     <Reference Include="System.IO.Hashing">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\PackageCache\com.unity.collections@aea9d3bd5e19\Unity.Collections.Tests\System.IO.Hashing\System.IO.Hashing.dll</HintPath>
     </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Rocks">
+      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\PackageCache\com.unity.visualscripting@191c0d7e3b69\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Mdb">
+      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\PackageCache\com.unity.nuget.newtonsoft-json@4dfd81071c64\Runtime\Newtonsoft.Json.dll</HintPath>
@@ -540,20 +553,8 @@
     <Reference Include="Mono.Cecil">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\PackageCache\com.unity.nuget.mono-cecil@ecb9724e46ff\Mono.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Rocks">
-      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Rocks.dll</HintPath>
-    </Reference>
-    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Pdb">
-      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Zenject-usage">
-      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Assets\Plugins\Zenject\Source\Usage\Zenject-usage.dll</HintPath>
-    </Reference>
     <Reference Include="Zenject.ReflectionBaking.Mono.Cecil">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Zenject.ReflectionBaking.Mono.Cecil.Mdb">
-      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Assets\Plugins\Zenject\OptionalExtras\ReflectionBaking\Lib\Zenject.ReflectionBaking.Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>C:\Program Files\Unity\Hub\Editor\6000.3.2f1\Editor\Data\PlaybackEngines\iOSSupport\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -987,9 +988,6 @@
     <Reference Include="Unity.Timeline">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
-    <Reference Include="PPv2URPConverters">
-      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Tooling.Editor">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.2D.Tooling.Editor.dll</HintPath>
     </Reference>
@@ -998,6 +996,9 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime.Shared">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="PPv2URPConverters">
+      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.2D.Runtime">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.2D.Runtime.dll</HintPath>
@@ -1086,14 +1087,14 @@
     <Reference Include="Unity.InputSystem.ForUI">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
-      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.GPUDriven.Runtime">
+      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.RenderPipelines.GPUDriven.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
@@ -1166,10 +1167,6 @@
       <Project>{b4c5c551-c819-3932-e68a-0ef2108d502c}</Project>
       <Name>Bezi.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Tools.B2B.PlayerRegistration.csproj">
-      <Project>{7fb75ba5-49c5-f173-e5d3-fef42be5ec03}</Project>
-      <Name>Tools.B2B.PlayerRegistration</Name>
-    </ProjectReference>
     <ProjectReference Include="Zenject-Editor.csproj">
       <Project>{92d804e6-3451-73c6-9027-0bff3078cbcb}</Project>
       <Name>Zenject-Editor</Name>
@@ -1178,6 +1175,10 @@
       <Project>{7a2ff76f-ff1c-1726-3603-b06bb827d02f}</Project>
       <Name>Zenject</Name>
     </ProjectReference>
+    <ProjectReference Include="Tools.B2B.PlayerRegistration.csproj">
+      <Project>{7fb75ba5-49c5-f173-e5d3-fef42be5ec03}</Project>
+      <Name>Tools.B2B.PlayerRegistration</Name>
+    </ProjectReference>
     <ProjectReference Include="UniTask.Addressables.csproj">
       <Project>{684c9bb9-86b4-f788-d61a-929b29ad6064}</Project>
       <Name>UniTask.Addressables</Name>
@@ -1185,6 +1186,10 @@
     <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
       <Project>{9e13e4cb-ffa4-d947-de26-9e4d55afe66b}</Project>
       <Name>Zenject-ReflectionBaking-Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Tools.SoundManager.csproj">
+      <Project>{3c444a4e-4d18-9ba7-1f5c-6d19a2c8b225}</Project>
+      <Name>Tools.SoundManager</Name>
     </ProjectReference>
     <ProjectReference Include="Zenject-PoolMonitor-Editor.csproj">
       <Project>{92f5022b-1371-46b1-b8da-6e8b4d6343fb}</Project>

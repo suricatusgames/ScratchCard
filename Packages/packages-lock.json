@@ -8,8 +8,14 @@
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       }
     },
-    "com.suricatusgames.tools.b2b-player-registration": {
+    "com.suricatusgames.tools.player-registration": {
       "version": "file:C:/Users/User/Documents/GitHub/tools/tools/Tools.PlayerRegistration",
+      "depth": 0,
+      "source": "local",
+      "dependencies": {}
+    },
+    "com.suricatusgames.tools.sound-manager": {
+      "version": "file:C:/Users/User/Documents/GitHub/tools/tools/Tools.SoundManager",
       "depth": 0,
       "source": "local",
       "dependencies": {}

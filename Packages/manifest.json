@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "com.suricatusgames.tools.b2b-player-registration": "file:C:/Users/User/Documents/GitHub/tools/tools/Tools.PlayerRegistration",
+    "com.suricatusgames.tools.player-registration": "file:C:/Users/User/Documents/GitHub/tools/tools/Tools.PlayerRegistration",
+    "com.suricatusgames.tools.sound-manager": "file:C:/Users/User/Documents/GitHub/tools/tools/Tools.SoundManager",
     "com.unity.2d.animation": "13.0.2",
     "com.unity.2d.aseprite": "3.0.1",
     "com.unity.2d.psdimporter": "12.0.1",

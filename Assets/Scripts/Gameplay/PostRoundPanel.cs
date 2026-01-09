@@ -1,6 +1,8 @@
 using System;
 using TMPro;
+using Tools.SoundManager.Services;
 using UnityEngine;
+using Zenject;
 
 namespace Gameplay
 {
@@ -21,7 +23,13 @@ namespace Gameplay
     
         [Header("Auto Transition")]
         [SerializeField] private float displayDuration = 1.5f;
-
+        
+        [Header("Audio Settings")]
+        [SerializeField] private AudioClip winSound;
+        [SerializeField] private AudioClip loseSound;
+        
+        [Inject] private ISoundManager _soundManager;
+        
         public event Action OnDisplayComplete;
 
         private bool _isShowing = false;
@@ -31,6 +39,7 @@ namespace Gameplay
             Debug.Log("PostRoundPanel: Showing WIN panel");
             SetTexts(winTitleText, winMessageText);
             Show();
+            _soundManager.PlaySfx(winSound);
         }
 
         public void ShowLose()
@@ -38,6 +47,7 @@ namespace Gameplay
             Debug.Log("PostRoundPanel: Showing LOSE panel");
             SetTexts(loseTitleText, loseMessageText);
             Show();
+            _soundManager.PlaySfx(loseSound);
         }
 
         public void Show()

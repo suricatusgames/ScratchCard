@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using Gameplay;
 using TMPro;
+using Tools.SoundManager.Services;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Utils;
+using Zenject;
 
 namespace ScratchCard
 {
@@ -33,6 +35,9 @@ namespace ScratchCard
         [Header("Services")]
         [SerializeField] private GoogleSheetsService googleSheetsService;
         
+        [Header("Audio Settings")]
+        [SerializeField] private AudioClip gameplayMusic;
+        
         [Header("Scene Settings")]
         [SerializeField] private string victorySceneName = "VictoryScene";
         
@@ -51,8 +56,11 @@ namespace ScratchCard
         
         private const string WinningPrizeKey = "WinningPrizeName";
         private const string GameResultKey = "GameResult";
+        
+        [Inject] private DiContainer _container;
+        [Inject] private ISoundManager _soundManager;
 
-        private void Start()
+        private async void Start()
         {
             if (mainCanvas == null)
             {
@@ -62,24 +70,30 @@ namespace ScratchCard
             if (googleSheetsService == null)
             {
                 googleSheetsService = FindObjectOfType<GoogleSheetsService>();
-                
+        
                 if (googleSheetsService == null)
                 {
-                    GameObject serviceObj = new GameObject("GoogleSheetsService");
+                    var serviceObj = new GameObject("GoogleSheetsService");
                     googleSheetsService = serviceObj.AddComponent<GoogleSheetsService>();
                     DontDestroyOnLoad(serviceObj);
                 }
             }
-            
+    
+            if (gameplayMusic != null && _soundManager != null)
+            {
+                await _soundManager.PlayMusic(gameplayMusic);
+            }
+    
             _maxAvailableScratches = UnityEngine.Random.Range(minAvailableCards, maxAvailableCards + 1);
             _remainingScratches = _maxAvailableScratches;
-            
+    
             SetupGridLayout();
             InstantiateScratchCards();
             ShowPreRoundPanel();
-            
+    
             LockAllCards();
         }
+
 
         private void ShowPreRoundPanel()
         {
@@ -166,16 +180,15 @@ namespace ScratchCard
         {
             for (int i = 0; i < totalCardsToDisplay; i++)
             {
-                var cardObject = Instantiate(scratchCardPrefab, cardsContainer);
+                var cardObject = _container.InstantiatePrefab(scratchCardPrefab, cardsContainer);
                 var card = cardObject.GetComponent<Gameplay.ScratchCard.ScratchCard>();
 
                 var randomPrize = GetRandomPrize();
                 card.Initialize(randomPrize);
-
                 card.OnPrizeRevealed += OnPrizeRevealed;
                 card.OnCardStarted += OnCardStarted;
                 card.OnCardUnlocked += OnCardUnlocked;
-                
+            
                 card.SetLocked(true);
                 _allCards.Add(card);
             }
