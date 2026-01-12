@@ -1,9 +1,11 @@
 ﻿using System;
 using TMPro;
+using Tools.SoundManager.Services;
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Victory
 {
@@ -19,25 +21,46 @@ namespace Victory
         
         [Header("Defeat Settings")]
         [SerializeField] private Sprite defeatImage;
+
+        [Header("Audio Settings")] 
+        [SerializeField] private AudioClip victoryMusic;
+        [SerializeField] private AudioClip defeatMusic;
+        [SerializeField] private float musicVolume = 0.7f;
         
         [Header("Scene Settings")]
         [SerializeField] private string mainMenuSceneName = "MainMenuScene";
+        
+        [Inject] private ISoundManager _soundManager;
+        
+        private float _originalMusicVolume;
         
         private const string WinningPrizeKey = "WinningPrizeName";
         private const string PlayerNameKey = "PlayerName";
         private const string GameResultKey = "GameResult";
 
-        private void Start()
+        private async void Start()
         {
-            string gameResult = PlayerPrefs.GetString(GameResultKey, "Lose");
-            
+            if (_soundManager != null)
+            {
+                _originalMusicVolume = _soundManager.GetMusicVolume();
+                _soundManager.SetMusicVolume(musicVolume);
+            }
+
+            var gameResult = PlayerPrefs.GetString(GameResultKey, "Lose");
+
             if (gameResult == "Win")
             {
                 DisplayVictory();
+
+                if (_soundManager != null && victoryMusic != null)
+                    await _soundManager.PlayMusic(victoryMusic, loop: true);
             }
             else
             {
                 DisplayDefeat();
+
+                if (_soundManager != null && defeatMusic != null)
+                    await _soundManager.PlayMusic(defeatMusic, loop: true);
             }
 
             if (backButton != null)
@@ -51,6 +74,9 @@ namespace Victory
 
         private void LoadMainMenuScene()
         {
+            if (_soundManager != null)
+                _soundManager.SetMusicVolume(_originalMusicVolume);
+            
             SceneManager.LoadScene(mainMenuSceneName);
         }
 

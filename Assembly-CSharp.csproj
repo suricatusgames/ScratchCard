@@ -1066,11 +1066,11 @@
     <Reference Include="Unity.VisualScripting.Flow.Editor">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.IK.Editor">
-      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.SpriteShape.Runtime">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.IK.Editor">
+      <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>C:\Users\User\Documents\GitHub\ScratchCard\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
@@ -1183,13 +1183,13 @@
       <Project>{684c9bb9-86b4-f788-d61a-929b29ad6064}</Project>
       <Name>UniTask.Addressables</Name>
     </ProjectReference>
-    <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
-      <Project>{9e13e4cb-ffa4-d947-de26-9e4d55afe66b}</Project>
-      <Name>Zenject-ReflectionBaking-Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Tools.SoundManager.csproj">
       <Project>{3c444a4e-4d18-9ba7-1f5c-6d19a2c8b225}</Project>
       <Name>Tools.SoundManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="Zenject-ReflectionBaking-Editor.csproj">
+      <Project>{9e13e4cb-ffa4-d947-de26-9e4d55afe66b}</Project>
+      <Name>Zenject-ReflectionBaking-Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Zenject-PoolMonitor-Editor.csproj">
       <Project>{92f5022b-1371-46b1-b8da-6e8b4d6343fb}</Project>

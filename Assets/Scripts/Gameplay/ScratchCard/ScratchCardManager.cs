@@ -37,6 +37,7 @@ namespace ScratchCard
         
         [Header("Audio Settings")]
         [SerializeField] private AudioClip gameplayMusic;
+        [SerializeField] private float gameplayMusicVolume = 0.3f;
         
         [Header("Scene Settings")]
         [SerializeField] private string victorySceneName = "VictoryScene";
@@ -56,6 +57,8 @@ namespace ScratchCard
         
         private const string WinningPrizeKey = "WinningPrizeName";
         private const string GameResultKey = "GameResult";
+
+        private float _originalMusicVolume;
         
         [Inject] private DiContainer _container;
         [Inject] private ISoundManager _soundManager;
@@ -79,9 +82,15 @@ namespace ScratchCard
                 }
             }
     
-            if (gameplayMusic != null && _soundManager != null)
+            if (_soundManager != null)
             {
-                await _soundManager.PlayMusic(gameplayMusic);
+                _originalMusicVolume = _soundManager.GetMusicVolume();
+                _soundManager.SetMusicVolume(gameplayMusicVolume);
+        
+                if (gameplayMusic != null)
+                {
+                    await _soundManager.PlayMusic(gameplayMusic);
+                }
             }
     
             _maxAvailableScratches = UnityEngine.Random.Range(minAvailableCards, maxAvailableCards + 1);
@@ -339,9 +348,9 @@ namespace ScratchCard
             
             _dataSent = true;
 
-            string playerName = PlayerPrefs.GetString("PlayerName", "Unknown");
-            string playerEmail = PlayerPrefs.GetString("PlayerEmail", "Unknown");
-            string playerPhone = PlayerPrefs.GetString("PlayerCellphone", "Unknown");
+            var playerName = PlayerPrefs.GetString("PlayerName", "Unknown");
+            var playerEmail = PlayerPrefs.GetString("PlayerEmail", "Unknown");
+            var playerPhone = PlayerPrefs.GetString("PlayerCellphone", "Unknown");
 
             if (googleSheetsService != null)
             {
@@ -372,6 +381,8 @@ namespace ScratchCard
 
         private void LoadVictoryScene()
         {
+            if (_soundManager != null)
+                _soundManager.SetMusicVolume(_originalMusicVolume);
             SceneManager.LoadScene(victorySceneName);
         }
 
