@@ -291,7 +291,7 @@ namespace Gameplay.ScratchCard
             
             progressRing.DOFillAmount(progress, 0.2f).SetEase(Ease.OutQuad);
             
-            Color targetColor = Color.Lerp(progressColorStart, progressColorEnd, progress);
+            var targetColor = Color.Lerp(progressColorStart, progressColorEnd, progress);
             progressRing.DOColor(targetColor, 0.2f);
         }
 
@@ -313,7 +313,7 @@ namespace Gameplay.ScratchCard
 
         private void PlayPrizeRevealAnimation()
         {
-            Sequence revealSequence = DOTween.Sequence();
+            var revealSequence = DOTween.Sequence();
             
             if (prizeFlashOverlay != null)
             {
@@ -325,8 +325,6 @@ namespace Gameplay.ScratchCard
             {
                 revealSequence.Join(prizeImage.rectTransform.DOScale(prizeScaleAmount, prizeScaleDuration * 0.5f).SetEase(Ease.OutBack));
                 revealSequence.Append(prizeImage.rectTransform.DOScale(1f, prizeScaleDuration * 0.5f).SetEase(Ease.InOutQuad));
-                
-                //revealSequence.Join(prizeImage.rectTransform.DORotate(new Vector3(0f, 0f, prizeRotationAmount), prizeScaleDuration, RotateMode.FastBeyond360).SetEase(Ease.OutQuad));
                 
                 revealSequence.Join(prizeImage.rectTransform.DOShakePosition(shakeDuration, shakeStrength, shakeVibrato, shakeRandomness, false, true).SetEase(Ease.OutQuad));
             }
