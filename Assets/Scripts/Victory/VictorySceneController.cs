@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using DG.Tweening;
 using TMPro;
 using Tools.SoundManager.Services;
 using Unity.VectorGraphics;
@@ -15,6 +16,15 @@ namespace Victory
         [SerializeField] private Image prizeDisplayImage;
         [SerializeField] private TextMeshProUGUI victoryMessageText;
         [SerializeField] private Button backButton;
+        
+        [Header("VFX")]
+        [SerializeField] private ParticleSystem confettiParticles;
+        
+        [Header("Prize Animation")]
+        [SerializeField] private float prizeScaleDuration = 1f;
+        [SerializeField] private float prizeScaleAmount = 1.2f;
+        [SerializeField] private float prizeBounceDuration = 0.5f;
+        [SerializeField] private int prizeBounceCount = 3;
         
         [Header("Prize Sprites")]
         [SerializeField] private Sprite[] allPrizeSprites;
@@ -108,10 +118,36 @@ namespace Victory
             {
                 prizeDisplayImage.sprite = winningSprite;
                 prizeDisplayImage.enabled = true;
+                
+                PlayPrizeRevealAnimation();
+                PlayConfetti();
             }
             else
             {
                 Debug.LogWarning($"Could not find sprite '{winningPrizeName}' or Image component is null");
+            }
+        }
+        
+        private void PlayPrizeRevealAnimation()
+        {
+            if (prizeDisplayImage == null || prizeDisplayImage.rectTransform == null) return;
+            
+            RectTransform prizeTransform = prizeDisplayImage.rectTransform;
+            prizeTransform.localScale = Vector3.zero;
+            
+            Sequence prizeSequence = DOTween.Sequence();
+            prizeSequence.Append(prizeTransform.DOScale(prizeScaleAmount, prizeScaleDuration).SetEase(Ease.OutBack));
+            prizeSequence.Append(prizeTransform.DOScale(1f, prizeBounceDuration).SetEase(Ease.InOutQuad));
+            
+            prizeSequence.Join(prizeTransform.DOPunchRotation(new Vector3(0, 0, 10), prizeBounceDuration, prizeBounceCount, 0.5f));
+        }
+        
+        private void PlayConfetti()
+        {
+            if (confettiParticles != null)
+            {
+                confettiParticles.Clear();
+                confettiParticles.Play();
             }
         }
 

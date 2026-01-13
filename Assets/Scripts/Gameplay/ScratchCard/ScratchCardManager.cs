@@ -187,11 +187,15 @@ namespace ScratchCard
         
         private void InstantiateScratchCards()
         {
+            float staggerDelay = 0.08f;
+            
             for (int i = 0; i < totalCardsToDisplay; i++)
             {
                 var cardObject = _container.InstantiatePrefab(scratchCardPrefab, cardsContainer);
                 var card = cardObject.GetComponent<Gameplay.ScratchCard.ScratchCard>();
 
+                card.SetSpawnDelay(i * staggerDelay);
+                
                 var randomPrize = GetRandomPrize();
                 card.Initialize(randomPrize);
                 card.OnPrizeRevealed += OnPrizeRevealed;

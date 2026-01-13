@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTask.Addressables", "UniTask.Addressables.csproj", "{684c9bb9-86b4-f788-d61a-929b29ad6064}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DOTween.Modules", "DOTween.Modules.csproj", "{5af7417e-ca95-a8c5-a910-0010c2d9bc8d}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zenject-TestFramework", "Zenject-TestFramework.csproj", "{3ae6bff1-d25e-277a-8245-ce7baf1c31db}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTask.TextMeshPro", "UniTask.TextMeshPro.csproj", "{15943058-12b6-e5a4-d57f-9d6edd2a0c65}"
@@ -66,6 +68,8 @@ Global
 		{f6314f2c-d2ee-cd25-ac16-d203fe51aee5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{684c9bb9-86b4-f788-d61a-929b29ad6064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{684c9bb9-86b4-f788-d61a-929b29ad6064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5af7417e-ca95-a8c5-a910-0010c2d9bc8d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5af7417e-ca95-a8c5-a910-0010c2d9bc8d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3ae6bff1-d25e-277a-8245-ce7baf1c31db}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3ae6bff1-d25e-277a-8245-ce7baf1c31db}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15943058-12b6-e5a4-d57f-9d6edd2a0c65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

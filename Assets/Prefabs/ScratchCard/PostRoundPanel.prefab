@@ -229,6 +229,8 @@ MonoBehaviour:
   gameOverText: {fileID: 8531794051024017509}
   messageText: {fileID: 5571480026939530917}
   panelContainer: {fileID: 926812154016032944}
+  panelBackground: {fileID: 0}
+  panelCanvasGroup: {fileID: 0}
   winTitleText: "PARAB\xC9NS!"
   winMessageText: "Voc\xEA encontrou 3 pr\xEAmios iguais!"
   loseTitleText: GAME OVER
@@ -236,6 +238,15 @@ MonoBehaviour:
   displayDuration: 1.5
   winSound: {fileID: 8300000, guid: b083b7753425f9c48ae0b375d6568e2f, type: 3}
   loseSound: {fileID: 8300000, guid: c5a6af7adb029df4ba0967bc4de9e7ac, type: 3}
+  winParticles: {fileID: 0}
+  winFlashColor: {r: 1, g: 0.84, b: 0, a: 0.3}
+  winScaleAmount: 1.2
+  loseParticles: {fileID: 0}
+  loseFlashColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.3}
+  loseShakeStrength: 20
+  entranceAnimationDuration: 0.8
+  textAnimationDelay: 0.3
+  flashDuration: 0.5
 --- !u!1 &1539437768478884314
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using Tools.SoundManager.Services;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -13,6 +14,8 @@ namespace Gameplay.ScratchCard
         [SerializeField] private RawImage scratchLayer;
         [SerializeField] private Image prizeImage;
         [SerializeField] private GameObject activeBorder;
+        [SerializeField] private Image progressRing;
+        [SerializeField] private Image prizeFlashOverlay;
 
         [Header("Settings")]
         [SerializeField] private int textureWidth = 512;
@@ -24,7 +27,30 @@ namespace Gameplay.ScratchCard
         [Header("Border Settings")]
         [SerializeField] private Color borderColor = Color.yellow;
         [SerializeField] private float borderWidth = 10f;
+
+        [Header("Prize Reveal VFX")]
+        [SerializeField] private ParticleSystem prizeRevealParticles;
+        [SerializeField] private float shakeStrength = 20f;
+        [SerializeField] private float shakeDuration = 0.5f;
+        [SerializeField] private float shakeRandomness = 90f;
+        [SerializeField] private int shakeVibrato = 10;
         
+        [Header("Spawn Animation")]
+        [SerializeField] private float spawnDelay = 0f;
+        [SerializeField] private float spawnDuration = 0.6f;
+        [SerializeField] private float spawnRotation = 180f;
+        
+        [Header("Progress Ring VFX")]
+        [SerializeField] private bool showProgressRing = true;
+        [SerializeField] private Color progressColorStart = Color.red;
+        [SerializeField] private Color progressColorEnd = Color.green;
+        
+        [Header("Prize Reveal Animation")]
+        [SerializeField] private float prizeScaleDuration = 0.8f;
+        [SerializeField] private float prizeScaleAmount = 1.3f;
+        [SerializeField] private float prizeRotationAmount = 360f;
+        [SerializeField] private Color flashColor = Color.white;
+
         [Header("Audio")]
         [SerializeField] private AudioClip scratchSound;
 
@@ -53,6 +79,53 @@ namespace Gameplay.ScratchCard
             {
                 activeBorder.SetActive(false);
             }
+            
+            if (progressRing != null)
+            {
+                progressRing.fillAmount = 0f;
+                progressRing.gameObject.SetActive(false);
+            }
+            
+            if (prizeFlashOverlay != null)
+            {
+                prizeFlashOverlay.color = new Color(flashColor.r, flashColor.g, flashColor.b, 0f);
+            }
+            
+            EnsureParticleSystemSetup();
+        }
+        
+        private void EnsureParticleSystemSetup()
+        {
+            if (prizeRevealParticles != null && prizeRevealParticles.transform.parent == transform)
+            {
+                var parentCanvas = GetComponentInParent<Canvas>();
+                if (parentCanvas != null)
+                {
+                    prizeRevealParticles.transform.SetParent(parentCanvas.transform, false);
+                    prizeRevealParticles.transform.SetAsLastSibling();
+                    
+                    var rectTransform = prizeRevealParticles.GetComponent<RectTransform>();
+                    if (rectTransform != null)
+                    {
+                        rectTransform.anchoredPosition = Vector2.zero;
+                        rectTransform.localPosition = new Vector3(0, 0, -10);
+                    }
+                    
+                    var canvas = prizeRevealParticles.GetComponent<Canvas>();
+                    if (canvas == null)
+                    {
+                        canvas = prizeRevealParticles.gameObject.AddComponent<Canvas>();
+                    }
+                    canvas.overrideSorting = true;
+                    canvas.sortingOrder = 999;
+                    
+                    var renderer = prizeRevealParticles.GetComponent<ParticleSystemRenderer>();
+                    if (renderer != null)
+                    {
+                        renderer.sortingOrder = 999;
+                    }
+                }
+            }
         }
 
         public void Initialize(Sprite prizeSprite)
@@ -60,6 +133,26 @@ namespace Gameplay.ScratchCard
             _assignedPrize = prizeSprite;
             prizeImage.sprite = prizeSprite;
             CreateScratchTexture();
+            PlaySpawnAnimation();
+        }
+        
+        public void SetSpawnDelay(float delay)
+        {
+            spawnDelay = delay;
+        }
+        
+        public void PlaySpawnAnimation()
+        {
+            var rectTransform = transform as RectTransform;
+            if (rectTransform == null) return;
+            
+            rectTransform.localScale = Vector3.zero;
+            rectTransform.localRotation = Quaternion.Euler(0f, spawnRotation, 0f);
+            
+            var spawnSequence = DOTween.Sequence();
+            spawnSequence.AppendInterval(spawnDelay);
+            spawnSequence.Append(rectTransform.DOScale(Vector3.one, spawnDuration).SetEase(Ease.OutBack));
+            spawnSequence.Join(rectTransform.DOLocalRotate(Vector3.zero, spawnDuration).SetEase(Ease.OutQuad));
         }
 
         public void SetLocked(bool locked)
@@ -171,6 +264,8 @@ namespace Gameplay.ScratchCard
         private void CheckRevealProgress()
         {
             var scratchPercentage = ScratchPercentage;
+            
+            UpdateProgressRing(scratchPercentage);
 
             if (scratchPercentage >= unlockThreshold && !_hasUnlocked)
             {
@@ -184,13 +279,63 @@ namespace Gameplay.ScratchCard
                 RevealPrize();
             }
         }
+        
+        private void UpdateProgressRing(float progress)
+        {
+            if (progressRing == null || !showProgressRing) return;
+            
+            if (progress > 0f && !progressRing.gameObject.activeSelf)
+            {
+                progressRing.gameObject.SetActive(true);
+            }
+            
+            progressRing.DOFillAmount(progress, 0.2f).SetEase(Ease.OutQuad);
+            
+            Color targetColor = Color.Lerp(progressColorStart, progressColorEnd, progress);
+            progressRing.DOColor(targetColor, 0.2f);
+        }
 
         private void RevealPrize()
         {
             _isScratched = true;
             scratchLayer.gameObject.SetActive(false);
+            
+            if (progressRing != null)
+            {
+                progressRing.gameObject.SetActive(false);
+            }
+            
             SetActive(false);
+            PlayPrizeRevealAnimation();
+            
             OnPrizeRevealed?.Invoke(_assignedPrize);
+        }
+
+        private void PlayPrizeRevealAnimation()
+        {
+            Sequence revealSequence = DOTween.Sequence();
+            
+            if (prizeFlashOverlay != null)
+            {
+                revealSequence.Append(prizeFlashOverlay.DOFade(0.8f, 0.15f).SetEase(Ease.OutQuad));
+                revealSequence.Append(prizeFlashOverlay.DOFade(0f, 0.35f).SetEase(Ease.InQuad));
+            }
+            
+            if (prizeImage != null && prizeImage.rectTransform != null)
+            {
+                revealSequence.Join(prizeImage.rectTransform.DOScale(prizeScaleAmount, prizeScaleDuration * 0.5f).SetEase(Ease.OutBack));
+                revealSequence.Append(prizeImage.rectTransform.DOScale(1f, prizeScaleDuration * 0.5f).SetEase(Ease.InOutQuad));
+                
+                //revealSequence.Join(prizeImage.rectTransform.DORotate(new Vector3(0f, 0f, prizeRotationAmount), prizeScaleDuration, RotateMode.FastBeyond360).SetEase(Ease.OutQuad));
+                
+                revealSequence.Join(prizeImage.rectTransform.DOShakePosition(shakeDuration, shakeStrength, shakeVibrato, shakeRandomness, false, true).SetEase(Ease.OutQuad));
+            }
+            
+            if (prizeRevealParticles != null)
+            {
+                prizeRevealParticles.Clear();
+                prizeRevealParticles.Play();
+            }
         }
 
         private void OnDestroy()

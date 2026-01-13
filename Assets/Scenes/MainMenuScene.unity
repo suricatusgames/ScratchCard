@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 11800873}
   - component: {fileID: 11800872}
   - component: {fileID: 11800871}
+  - component: {fileID: 11800874}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -239,6 +240,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11800869}
   m_CullTransparentMesh: 1
+--- !u!114 &11800874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 11800869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea97213c98b8e5a40a740138c91d5df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Utils.ButtonVFX
+  enableScaleAnimation: 1
+  hoverScale: 1.1
+  pressScale: 0.95
+  scaleDuration: 0.2
+  enablePulse: 0
+  pulseScale: 1.05
+  pulseDuration: 1
+  enableColorAnimation: 0
+  hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  pressColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  colorDuration: 0.2
+  enableRotationOnClick: 1
+  rotationAmount: 5
+  rotationVibrato: 3
+  enableClickParticles: 0
+  clickParticles: {fileID: 0}
 --- !u!1 &74099072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,6 +1701,7 @@ GameObject:
   - component: {fileID: 1108650450}
   - component: {fileID: 1108650449}
   - component: {fileID: 1108650448}
+  - component: {fileID: 1108650451}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -1781,6 +1811,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1108650446}
   m_CullTransparentMesh: 1
+--- !u!114 &1108650451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1108650446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea97213c98b8e5a40a740138c91d5df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Utils.ButtonVFX
+  enableScaleAnimation: 1
+  hoverScale: 1.1
+  pressScale: 0.95
+  scaleDuration: 0.2
+  enablePulse: 0
+  pulseScale: 1.05
+  pulseDuration: 1
+  enableColorAnimation: 0
+  hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  pressColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  colorDuration: 0.2
+  enableRotationOnClick: 1
+  rotationAmount: 5
+  rotationVibrato: 3
+  enableClickParticles: 0
+  clickParticles: {fileID: 0}
 --- !u!1 &1502982849
 GameObject:
   m_ObjectHideFlags: 0
@@ -3163,6 +3221,7 @@ GameObject:
   - component: {fileID: 2014569437}
   - component: {fileID: 2014569436}
   - component: {fileID: 2014569435}
+  - component: {fileID: 2014569438}
   m_Layer: 5
   m_Name: Sound Button
   m_TagString: Untagged
@@ -3271,6 +3330,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014569433}
   m_CullTransparentMesh: 1
+--- !u!114 &2014569438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014569433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea97213c98b8e5a40a740138c91d5df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Utils.ButtonVFX
+  enableScaleAnimation: 1
+  hoverScale: 1.1
+  pressScale: 0.95
+  scaleDuration: 0.2
+  enablePulse: 0
+  pulseScale: 1.05
+  pulseDuration: 1
+  enableColorAnimation: 0
+  hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  pressColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  colorDuration: 0.2
+  enableRotationOnClick: 1
+  rotationAmount: 5
+  rotationVibrato: 3
+  enableClickParticles: 0
+  clickParticles: {fileID: 0}
 --- !u!1 &2049144207
 GameObject:
   m_ObjectHideFlags: 0
@@ -3283,6 +3370,7 @@ GameObject:
   - component: {fileID: 2049144211}
   - component: {fileID: 2049144210}
   - component: {fileID: 2049144209}
+  - component: {fileID: 2049144212}
   m_Layer: 5
   m_Name: Edit Button
   m_TagString: Untagged
@@ -3391,6 +3479,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2049144207}
   m_CullTransparentMesh: 1
+--- !u!114 &2049144212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049144207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea97213c98b8e5a40a740138c91d5df1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Utils.ButtonVFX
+  enableScaleAnimation: 1
+  hoverScale: 1.1
+  pressScale: 0.95
+  scaleDuration: 0.2
+  enablePulse: 0
+  pulseScale: 1.05
+  pulseDuration: 1
+  enableColorAnimation: 0
+  hoverColor: {r: 1, g: 1, b: 1, a: 1}
+  pressColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  colorDuration: 0.2
+  enableRotationOnClick: 1
+  rotationAmount: 5
+  rotationVibrato: 3
+  enableClickParticles: 0
+  clickParticles: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
